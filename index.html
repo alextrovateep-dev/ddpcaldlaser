@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDP - Documento Técnico - Caldlaser | TeepMES</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2.5cm;
+        }
+        body {
+            font-family: 'Calibri', 'Arial', sans-serif;
+            font-size: 11pt;
+            line-height: 1.45;
+            color: #333;
+            max-width: 21cm;
+            margin: 0 auto;
+            padding: 18px;
+        }
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #507A69;
+            border-bottom: 1px solid rgba(80, 122, 105, 0.35);
+            padding-bottom: 6px;
+            margin-top: 22px;
+            margin-bottom: 12px;
+        }
+        h2 {
+            font-size: 13.5pt;
+            font-weight: bold;
+            color: #507A69;
+            margin-top: 18px;
+            margin-bottom: 10px;
+        }
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #2d4538;
+            margin-top: 14px;
+            margin-bottom: 8px;
+        }
+        h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+        p {
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+        ul, ol {
+            margin-left: 22px;
+            margin-bottom: 10px;
+        }
+        li {
+            margin-bottom: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+        th {
+            background-color: #507A69;
+            color: white;
+            padding: 8px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #2d4538;
+        }
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(80, 122, 105, 0.25);
+        }
+        .header-logos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .header-logos > div {
+            flex: 1;
+            text-align: center;
+        }
+        .header-logos > div:first-child {
+            text-align: left;
+        }
+        .header-logos > div:last-child {
+            text-align: right;
+        }
+        .header-logos img {
+            max-height: 56px;
+            max-width: 220px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        .header h1 {
+            font-size: 22pt;
+            color: #507A69;
+            margin-bottom: 10px;
+            border-bottom: 0;
+        }
+        .header-info {
+            font-size: 11pt;
+            color: #666;
+        }
+        .section {
+            page-break-inside: avoid;
+            margin-bottom: 18px;
+        }
+        .process-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #507A69;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        .responsibility-box {
+            background-color: #e8f5e9;
+            border: 1px solid #507A69;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .technical-spec {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        .flow-step {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        /* Fluxo visual (estático e profissional) */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 14px;
+            margin: 10px 0;
+        }
+        .flow-diagram .node {
+            background: #fff;
+            border: 1px solid #dcdcdc;
+            border-left: 4px solid #507A69;
+            border-radius: 6px;
+            min-width: 140px;
+            text-align: center;
+            color: #2d4538;
+            padding: 10px 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .flow-diagram .node .title { font-weight: 700; }
+        .flow-diagram .node .sub { font-size: 10pt; color: #5a6a62; }
+        .flow-diagram .arrow { color: #507A69; font-size: 18pt; font-weight: 700; padding: 0 2px; }
+        .component-table {
+            width: 100%;
+            margin: 15px 0;
+        }
+        .reference-link {
+            color: #507A69;
+            text-decoration: none;
+        }
+        .reference-link:hover {
+            text-decoration: underline;
+        }
+        .page-break {
+            page-break-before: always;
+        }
+        .approval-section {
+            page-break-before: always;
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid rgba(80, 122, 105, 0.35);
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .logo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        .logo-container > div {
+            flex: 1;
+            text-align: center;
+        }
+        .logo-container > div:first-child {
+            text-align: left;
+        }
+        .logo-container > div:last-child {
+            text-align: right;
+        }
+        .logo-container img {
+            max-height: 64px;
+            max-width: 220px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        .approval-form {
+            background: #fff;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #e5e5e5;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+        .form-group { margin-bottom: 14px; }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2d4538;
+            font-size: 11pt;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 11pt;
+            font-family: 'Calibri', 'Arial', sans-serif;
+            box-sizing: border-box;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #507A69;
+            box-shadow: 0 0 5px rgba(80, 122, 105, 0.3);
+        }
+        .approval-button {
+            background: linear-gradient(135deg, #507A69, #3d5f4e);
+            color: #fff;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 11pt;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            width: auto;
+            transition: background 0.2s ease;
+            display: inline-block;
+        }
+        .approval-button:hover {
+            background: linear-gradient(135deg, #3d5f4e, #2d4538);
+        }
+        .approval-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .approval-title {
+            text-align: center;
+            color: #507A69;
+            margin-bottom: 16px;
+            font-size: 15pt;
+        }
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: none;
+            border: 1px solid #c3e6cb;
+        }
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: none;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-logos">
+            <div>
+                <img src="https://teep.com.br/wp-content/uploads/2023/11/cropped-cropped-teep-logo-menor-300x87.png" alt="Teep Logo">
+            </div>
+            <div>
+                <img src="https://www.caldlaser.com.br/imagens/logo-quality.png" alt="Caldlaser Logo">
+            </div>
+        </div>
+        <h1>DDP – Definição de Processo e Infraestrutura</h1>
+        <div class="header-info">
+            <strong>Cliente:</strong> Caldlaser | <strong>Sistema:</strong> TeepMES | <strong>Versão:</strong> 1.1
+        </div>
+        <div class="header-info" style="margin-top: 10px;">
+            <strong>Data:</strong> <span id="current-date"></span>
+        </div>
+    </div>
+
+    <div class="section page-break">
+        <h1>Resumo Executivo</h1>
+        <div class="process-box">
+            <h3>Escopo do Projeto</h3>
+            <p>Soldagem manual (41 máquinas, consumo individual), 2 lasers (fim de corte por plano), 3 dobradeiras (modo tempo) e 2 células de robôs (Modbus/digitais).</p>
+        </div>
+        <div class="process-box">
+            <h3>Responsabilidades</h3>
+            <ul>
+                <li><strong>Caldlaser:</strong> Infra elétrica/física/rede, aquisição de TC 200/5A e RMCS‑TC, e dados técnicos (nº de série, consumos, mapa Modbus).</li>
+                <li><strong>Teep:</strong> Fornecimento/instalação dos módulos IoT, configuração de integrações (solda, laser, dobradeira, robô), comissionamento e treinamento.</li>
+            </ul>
+        </div>
+        <div class="process-box">
+            <h3>Resultados Esperados</h3>
+            <ul>
+                <li>Rastreabilidade por OP/agrupamento e tempos de operação/parada automáticos.</li>
+                <li>Quantidades: automáticas (laser/robô) e manuais (solda/dobradeira).</li>
+                <li>Relatórios de produtividade e OEE (quando aplicável), com histórico para melhoria contínua.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h1>1. Objetivo</h1>
+        <p>Definir a arquitetura, responsabilidades e infraestrutura elétrica/lógica para o monitoramento e gestão de produção no <strong>TeepMES</strong>, incluindo soldagem manual (MIG/TIG), 2 lasers de corte, 3 dobradeiras e 2 robôs de solda.</p>
+        <p><strong>Meta Principal:</strong> Garantir rastreabilidade completa, medição de tempos produtivos/paradas e registro de quantidades (automático ou manual conforme o processo específico de cada máquina).</p>
+    </div>
+
+    <div class="section page-break">
+        <h1>2. Escopo e Processos Cobertos</h1>
+        
+        <h2>2.1. Soldagem Manual (MIG / TIG)</h2>
+        <p>Monitoramento de 41 máquinas de soldagem através de detecção por corrente elétrica utilizando RMCS‑TC + TC 200/5 A, com produção manual.</p>
+        
+        <h3>Solda TIG - 6 unidades</h3>
+        <ul>
+            <li>Sumig Tiger205 = 1 unidade</li>
+            <li>Castolin Eutectic Migpulse 2001dp = 2 unidades</li>
+            <li>Miller Syncrowave200 = 2 unidades</li>
+            <li>Miller Maxstar 200 = 1 unidade</li>
+        </ul>
+        
+        <h3>Solda MIG - 35 unidades</h3>
+        <ul>
+            <li>Sumig Falcon 405 = 7 unidades</li>
+            <li>Bambozzi Tmc325B = 9 unidades</li>
+            <li>Bambozzi MTE-510i = 3 unidades</li>
+            <li>Bambozzi Megaplus 400df = 3 unidades</li>
+            <li>Bambozzi Megaplus 250 = 3 unidades</li>
+            <li>Castolin Eutectic Smartmig 4.1 = 5 unidades</li>
+            <li>Bambozzi Megaplus 350DF = 4 unidades</li>
+            <li>Sumig Intellimig 500 = 1 unidade</li>
+        </ul>
+        
+        <h2>2.2. Lasers de Corte - 2 máquinas</h2>
+        <p>Captura automática do fim de corte e quantidades por plano (agrupamento de OPs).</p>
+        
+        <h2>2.3. Dobradeiras - 3 máquinas</h2>
+        <p>Monitoramento em modo tempo (tempos de operação) com produção informada manualmente pelo operador.</p>
+        
+        <h2>2.4. Robôs de Solda - 2 células</h2>
+        <p>Conexão via protocolo Modbus (preferencial) com variáveis de status/ciclo, ou alternativa por entradas digitais quando Modbus não disponível.</p>
+    </div>
+
+    <div class="section page-break">
+        <h1>3. Processo de Soldagem Manual (MIG/TIG)</h1>
+        
+        <h2>3.1. Método de Monitoramento</h2>
+        <p>Monitoramento indireto por corrente elétrica na tomada de alimentação da máquina de solda. O sistema detecta automaticamente quando a máquina está em operação (soldando) ou parada através da variação de corrente elétrica.</p>
+        
+        <h2>3.2. Dispositivos de Medição</h2>
+        <div class="technical-spec">
+            <p><strong>Transformador de Corrente (TC):</strong> TC 200/5 A instalado em cada tomada individual onde será conectada uma máquina de solda.</p>
+            <p><strong>Relé Monitor de Corrente:</strong> RMCS‑TC 220 V com entrada para TC 5 A, configurado com setpoint ajustável e delays programáveis.</p>
+        </div>
+        
+        <h2>3.3. Sinalização para o Sistema TeepMES</h2>
+        <p>O relé RMCS‑TC possui saída em contato seco (NA/NF) que aciona uma fonte de 24 VDC. Esta fonte alimenta a entrada digital do módulo IoT Teep, garantindo isolamento completo entre a rede de alta tensão e o sistema de monitoramento.</p>
+        
+        <h2>3.4. Lógica de Detecção</h2>
+        <ul>
+            <li><strong>Corrente acima do setpoint configurado:</strong> Estado 'Soldando' / 'Em Operação'</li>
+            <li><strong>Corrente abaixo do setpoint configurado:</strong> Estado 'Parado' / 'Aguardando'</li>
+            <li><strong>Setpoint:</strong> Configurado individualmente por máquina, baseado no consumo "Parado" e "Soldando" informado</li>
+            <li><strong>Delays:</strong> ON 1–2 s e OFF 3–5 s para evitar oscilações e falsos disparos</li>
+        </ul>
+        
+        <h2>3.5. Produção</h2>
+        <p>A contagem de quantidade produzida é realizada manualmente pelo operador ao final da Ordem de Produção (OP). O sistema registra automaticamente os tempos de operação e parada.</p>
+        
+        <h2>3.6. Configuração Individual de Máquinas</h2>
+        <p>Cada máquina de solda possui consumo elétrico individual, mesmo sendo do mesmo modelo, devido a variações causadas por tempo de uso, manutenções e calibrações. Portanto, será necessário:</p>
+        <ul>
+            <li>Cadastrar cada máquina individualmente com seu número de série</li>
+            <li>Medir e registrar o consumo em amperes quando a máquina está parada (ligada mas não soldando)</li>
+            <li>Medir e registrar o consumo em amperes quando a máquina está soldando ativamente</li>
+            <li>Configurar o setpoint do RMCS-TC entre esses dois valores para cada tomada/máquina</li>
+        </ul>
+    </div>
+
+    
+
+    <div class="section page-break">
+        <h1>4. Infraestrutura e Instalação</h1>
+        
+        <h2>4.1. Componentes por Processo</h2>
+        <table class="component-table">
+            <thead>
+                <tr>
+                    <th>Processo</th>
+                    <th>Sinal/Sensor</th>
+                    <th>Módulo Teep</th>
+                    <th>Observações Técnicas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Soldagem Manual</strong></td>
+                    <td>RMCS‑TC + TC 200/5 A<br>(contato seco)</td>
+                    <td>Entradas digitais 24 V</td>
+                    <td>1 TC por tomada; delays configuráveis; setpoint individual por máquina</td>
+                </tr>
+                <tr>
+                    <td><strong>Laser</strong></td>
+                    <td>Fim de corte (digital) / sensor de ciclo</td>
+                    <td>Entradas digitais 24 V</td>
+                    <td>Vincular a ID de plano (agrupamento de OPs)</td>
+                </tr>
+                <tr>
+                    <td><strong>Dobradeira</strong></td>
+                    <td>Sinal de operação (digital) / botão seletor</td>
+                    <td>Entradas digitais 24 V</td>
+                    <td>Modo tempo; produção manual</td>
+                </tr>
+                <tr>
+                    <td><strong>Robô de Solda</strong></td>
+                    <td>Modbus (preferencial) / digitais alternativas</td>
+                    <td>Módulo/driver Modbus + digitais</td>
+                    <td>Necessário mapa de variáveis do fabricante do robô</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h2>4.2. Especificações Técnicas dos Componentes</h2>
+        
+        <div class="process-box">
+            <h3>Transformador de Corrente (TC) 200/5A</h3>
+            <ul>
+                <li><strong>Modelo:</strong> TC 200/5A - Classe 1.0</li>
+                <li><strong>Relação:</strong> 200A primário / 5A secundário</li>
+                <li><strong>Precisão:</strong> Classe 1.0</li>
+                <li><strong>Montagem:</strong> DIN Rail</li>
+                <li><strong>Referência Principal:</strong> <a href="https://www.dimensional.com.br/transformador-corrente-janela-200-5-ref-mes62-30-200-5-5tca12005-altronic/p?idsku=1290787" target="_blank" class="reference-link">Dimensional - TC 200/5A</a></li>
+                <li><strong>Alternativa:</strong> Schneider METSECT5CC020 ou similar</li>
+                <li><strong>Quantidade:</strong> 1 unidade por tomada de soldagem</li>
+                <li><strong>Responsabilidade de Aquisição:</strong> Caldlaser</li>
+            </ul>
+        </div>
+        
+        <div class="process-box">
+            <h3>Relé Monitor de Corrente (RMCS-TC)</h3>
+            <ul>
+                <li><strong>Modelo:</strong> RMCS-TC com entrada TC x5A</li>
+                <li><strong>Tensão de Alimentação:</strong> 220V AC (ou conforme especificação da rede elétrica atual do cliente)</li>
+                <li><strong>Entrada:</strong> TC 5A (compatível com TC 200/5A)</li>
+                <li><strong>Saída:</strong> Contato seco SPDT (NA/NF)</li>
+                <li><strong>Setpoint:</strong> Ajustável (recomendado 5-10% da escala, configurado individualmente por máquina)</li>
+                <li><strong>Delays:</strong> ON 1-2s / OFF 3-5s (configuráveis)</li>
+                <li><strong>Referência:</strong> <a href="https://www.primtec.com.br/rele-monitor-e-controle-de-corrente-220v-com-entrada-para-tc-x-5a-ajustavel-rmcs" target="_blank" class="reference-link">Primtec - RMCS-TC</a></li>
+                <li><strong>Quantidade:</strong> 1 unidade por tomada de soldagem</li>
+                <li><strong>Responsabilidade de Aquisição:</strong> Caldlaser</li>
+            </ul>
+        </div>
+        
+        <div class="process-box">
+            <h3>Módulos IoT Teep</h3>
+            <ul>
+                <li><strong>Função:</strong> Entradas digitais 24V isoladas</li>
+                <li><strong>Alimentação:</strong> 24VDC (fonte fornecida e instalada pelo cliente)</li>
+                <li><strong>Entradas:</strong> Digitais 24V com isolamento galvânico completo do 220/380V</li>
+                <li><strong>Comunicação:</strong> Ethernet industrial (IP fixo)</li>
+                <li><strong>Proteção:</strong> Isolamento galvânico completo</li>
+                <li><strong>Quantidade:</strong> Conforme número de pontos de monitoramento</li>
+                <li><strong>Responsabilidade de Fornecimento e Instalação:</strong> Teep</li>
+            </ul>
+        </div>
+        
+        <h2>4.3. Cabeamento Recomendado</h2>
+        <ul>
+            <li><strong>TC → RMCS‑TC:</strong> 2x0,5 mm² par trançado blindado (comprimento máximo até 2 m)</li>
+            <li><strong>Saída RMCS‑TC → Módulo Teep:</strong> 2x0,25 mm² (comprimento máximo até 10 m)</li>
+            <li><strong>24 VDC para módulos/relés:</strong> Fonte DIN 24 V / 2–5 A por quadro; proteção individual por disjuntores/fusíveis</li>
+            <li><strong>Ethernet:</strong> IP fixo para módulos/terminais; switch industrial; Wi‑Fi industrial onde aplicável</li>
+        </ul>
+
+        <h2>4.4. Exemplo de Ligação Elétrica e Lógica (Soldagem Manual)</h2>
+        <div class="process-box">
+            <h3>Diagrama de blocos (conceitual)</h3>
+            <pre style="white-space: pre-wrap; font-family: Consolas, 'Courier New', monospace; background:#f8f9fa; padding:10px; border:1px solid #e5e5e5; border-radius:6px;">
+Rede 220/380 V ─── Tomada da máquina ──┬──────────────┐
+                                       │              │
+                                       │          Transformador de Corrente (TC 200/5 A)
+                                       │              │ secundário 5 A
+                                       │              ▼
+                                       │        Relé Monitor RMCS‑TC (entrada TC 5 A)
+                                       │              │ contato seco (NA/NF)
+                                       │              ▼
+                                       │        Fonte 24 VDC ──► Entrada Digital 24 V do Módulo IoT Teep
+                                       │                                   │
+Máquina de Solda (MIG/TIG) ◄───────────┘                                   ▼
+                                                                  Sistema TeepMES (Tempo/Estado)
+            </pre>
+            <h3>Sequência de ligação</h3>
+            <ol>
+                <li>Instalar o <strong>TC 200/5 A</strong> no condutor fase da <strong>tomada</strong> da máquina de solda (ponto fixo da baia).</li>
+                <li>Conectar os terminais do TC (5 A) à <strong>entrada do RMCS‑TC</strong> (TC x5A), respeitando polaridade/sentido.</li>
+                <li>Alimentar o <strong>RMCS‑TC</strong> em <strong>220 V AC</strong> (ou conforme rede do cliente).</li>
+                <li>Usar o <strong>contato seco</strong> do RMCS‑TC (NA/NF) para <strong>acionar 24 VDC</strong> (por meio de fonte DIN 24 V) para a <strong>entrada digital</strong> do módulo IoT Teep.</li>
+                <li>Ligar o <strong>módulo IoT Teep</strong> à rede <strong>Ethernet</strong> (IP fixo) para envio de estados ao <strong>TeepMES</strong>.</li>
+            </ol>
+            <h3>Lógica de operação</h3>
+            <ul>
+                <li>Corrente medida pelo TC &gt; setpoint do RMCS‑TC ⇒ contato fecha ⇒ 24 V na entrada ⇒ <strong>Estado: Soldando</strong>.</li>
+                <li>Corrente &lt; setpoint por tempo &gt;= delay OFF ⇒ contato abre ⇒ 0 V na entrada ⇒ <strong>Estado: Parado</strong>.</li>
+                <li>Delays recomendados: <strong>ON 1–2 s</strong> / <strong>OFF 3–5 s</strong>.</li>
+            </ul>
+            <h3>Observações e segurança</h3>
+            <ul>
+                <li>O <strong>terminal/baia</strong> de solda é associado à máquina selecionada na abertura da OP; a <strong>tomada</strong> (T01, T02, …) deve ser confirmada.</li>
+                <li>O secundário do <strong>TC</strong> não deve permanecer aberto com o primário energizado; usar bloco de curto em manutenção.</li>
+                <li>Manter <strong>isolação</strong> entre 24 VDC e rede 220/380 V; utilizar cabeamento blindado e aterramento de um lado.</li>
+            </ul>
+        </div>
+
+        <h2>4.5. Fluxo Visual (Estático) – Rede → TC → RMCS‑TC → 24 V → Teep → TeeOEE</h2>
+        <div class="flow-diagram" role="img" aria-label="Rede; TC; RMCS‑TC; Fonte 24V; Módulo Teep; TeeOEE conectados em sequência com setas">
+            <div class="node"><div class="title">Rede 220/380 V</div><div class="sub">Tomada da Baia</div></div>
+            <div class="arrow">→</div>
+            <div class="node"><div class="title">TC 200/5A</div><div class="sub">Mede Corrente</div></div>
+            <div class="arrow">→</div>
+            <div class="node"><div class="title">RMCS‑TC</div><div class="sub">Setpoint + Delays</div></div>
+            <div class="arrow">→</div>
+            <div class="node"><div class="title">Fonte 24 VDC</div><div class="sub">Contato NA/NF</div></div>
+            <div class="arrow">→</div>
+            <div class="node"><div class="title">Módulo IoT Teep</div><div class="sub">Entrada Digital 24 V</div></div>
+            <div class="arrow">→</div>
+            <div class="node"><div class="title">TeeOEE / TeepMES</div><div class="sub">Estados e Tempos</div></div>
+        </div>
+    </div>
+
+    <div class="section page-break">
+        <h1>9. Identificação e Cadastro no Sistema</h1>
+        <ul>
+            <li><strong>Tomadas e pontos:</strong> T01, T02, T03, … (etiquetas físicas obrigatórias e cadastro correspondente no TeepMES)</li>
+            <li><strong>Máquinas:</strong> Código único, família (TIG/MIG/laser/dobradeira/robô), modelo, número de série e número de patrimônio quando aplicável</li>
+            <li><strong>Terminais/módulos:</strong> ID físico único, IP fixo configurado, localização física (baia/área)</li>
+            <li><strong>Planos de corte (laser):</strong> ID de agrupamento/"nesting" vinculado à OP correspondente no PCP</li>
+            <li><strong>Motivos de parada:</strong> Lista padronizada configurável (ex.: operacional, setup, falta de material, manutenção, qualidade)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h1>8. Requisitos do Cliente (Caldlaser)</h1>
+        <div class="responsibility-box">
+            <h3>Infraestrutura Elétrica</h3>
+            <ul>
+                <li>Disponibilizar alimentação 220 V AC para relés RMCS‑TC (ou conforme especificação da rede elétrica atual)</li>
+                <li>Disponibilizar alimentação 24 VDC para módulos Teep (fonte DIN 24 V / 2–5 A por quadro)</li>
+                <li>Fornecer proteção individual por disjuntores/fusíveis para cada circuito</li>
+            </ul>
+            
+            <h3>Infraestrutura Física</h3>
+            <ul>
+                <li>Definir e disponibilizar painéis locais para instalação dos módulos Teep, fontes 24 V e patch Ethernet</li>
+                <li>Garantir espaço adequado para montagem dos componentes (TC, RMCS-TC, módulos)</li>
+            </ul>
+            
+            <h3>Infraestrutura de Rede</h3>
+            <ul>
+                <li>Disponibilizar rede Ethernet/Wi‑Fi industrial nos pontos de instalação</li>
+                <li>Configurar IPs fixos conforme especificação técnica da Teep</li>
+                <li>Garantir conectividade até o servidor TeepMES</li>
+            </ul>
+            
+            <h3>Dados e Documentação Técnica</h3>
+            <ul>
+                <li>Fornecer mapa completo de variáveis Modbus dos robôs (quando aplicável), incluindo endereços, tipos de dados e significados</li>
+                <li>Validar layout de baias, tomadas e fluxos de OP/agrupamento com o PCP</li>
+                <li>Fornecer lista de máquinas com números de série para cadastro individual</li>
+                <li>Disponibilizar informações de consumo elétrico (parado/soldando) para cada máquina de solda</li>
+            </ul>
+            
+            <h3>Aquisição de Componentes</h3>
+            <ul>
+                <li>Adquirir todos os Transformadores de Corrente (TC) 200/5A necessários</li>
+                <li>Adquirir todos os Relés RMCS-TC necessários</li>
+                <li>Garantir que componentes estejam disponíveis para instalação no prazo acordado</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section page-break">
+        <h1>10. Responsabilidades da Teep</h1>
+        <div class="responsibility-box">
+            <h3>Fornecimento e Instalação</h3>
+            <ul>
+                <li>Fornecer todos os módulos IoT Teep necessários para o monitoramento</li>
+                <li>Instalar e configurar os módulos Teep nos painéis fornecidos pelo cliente</li>
+                <li>Realizar configuração inicial dos módulos (IP fixo, identificação, comunicação)</li>
+            </ul>
+            
+            <h3>Desenvolvimento e Configuração do Sistema</h3>
+            <ul>
+                <li>Desenvolver e configurar todas as integrações necessárias:
+                    <ul>
+                        <li>Integração Modbus para robôs de solda (quando disponível)</li>
+                        <li>Configuração de entradas digitais para dobradeiras</li>
+                        <li>Configuração de captura automática para lasers (fim de corte)</li>
+                        <li>Configuração de monitoramento por corrente para soldagem manual</li>
+                    </ul>
+                </li>
+                <li>Configurar cadastro de todas as máquinas, tomadas e pontos de monitoramento</li>
+                <li>Desenvolver interfaces do operador específicas para cada tipo de processo</li>
+            </ul>
+            
+            <h3>Processo Padrão TeepMES</h3>
+            <ul>
+                <li>Implementar processo de abertura de OP conforme especificado para cada tipo de máquina</li>
+                <li>Desenvolver lógica de monitoramento automático de tempos (operação/parada)</li>
+                <li>Implementar captura automática de quantidades (laser/robô) e interface manual (solda/dobradeira)</li>
+                <li>Desenvolver sistema de apontamento de paradas por motivo</li>
+                <li>Implementar encerramento de OP com consolidação de dados</li>
+                <li>Desenvolver relatórios e painéis de produtividade, OEE e rastreabilidade</li>
+            </ul>
+            
+            <h3>Comissionamento e Testes</h3>
+            <ul>
+                <li>Realizar comissionamento completo de todos os pontos de monitoramento</li>
+                <li>Validar funcionamento de cada componente (TC, RMCS-TC, módulos Teep)</li>
+                <li>Testar integrações Modbus (robôs) e digitais (demais máquinas)</li>
+                <li>Treinar operadores e equipe de manutenção</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h1>7. Segurança e EMC</h1>
+        <ul>
+            <li><strong>Isolação:</strong> Contatos secos e 24 VDC completamente isolados da rede de alimentação (220V/380V conforme especificação da rede elétrica atual do cliente). O relé RMCS-TC será alimentado em 220V ou conforme especificação da rede elétrica atual do cliente.</li>
+            <li><strong>Blindagem/aterramento:</strong> Par trançado blindado obrigatório, aterramento de um lado apenas; utilização de ferrites em máquinas TIG com HF (alta frequência)</li>
+            <li><strong>Transformador de Corrente (TC):</strong> <strong>ATENÇÃO:</strong> Nunca operar com secundário aberto quando energizado; utilizar bloco de curto para manutenção</li>
+            <li><strong>Painéis:</strong> Organização adequada de cabos, identificação clara e segregação física entre cabos de potência e cabos de sinal</li>
+        </ul>
+    </div>
+
+    <div class="section page-break">
+        <h1>6. Comissionamento e Testes</h1>
+        <h2>Checklist por Processo</h2>
+        
+        <div class="process-box">
+            <h3>Soldagem Manual (MIG/TIG)</h3>
+            <ol>
+                <li>Instalação física do TC 200/5A em cada tomada</li>
+                <li>Conexão do TC ao RMCS-TC conforme especificação de cabeamento</li>
+                <li>Medição de corrente em vazio (máquina ligada mas não soldando) para cada máquina</li>
+                <li>Medição de corrente durante soldagem ativa para cada máquina</li>
+                <li>Configuração do setpoint do RMCS-TC entre os valores de consumo parado e soldando</li>
+                <li>Ajuste dos delays ON (1-2s) e OFF (3-5s) para evitar oscilações</li>
+                <li>Validação do acionamento do relé RMCS-TC (contato seco)</li>
+                <li>Teste da fonte 24V conectada à saída do relé</li>
+                <li>Validação da entrada digital do módulo Teep recebendo o sinal 24V</li>
+                <li>Verificação da detecção correta de estado "Soldando" vs "Parado" no sistema TeepMES</li>
+            </ol>
+        </div>
+        
+        <div class="process-box">
+            <h3>Lasers de Corte</h3>
+            <ol>
+                <li>Validação do pulso de fim de corte via saída digital da máquina/PLC</li>
+                <li>Conexão do sinal digital ao módulo Teep (entrada 24V)</li>
+                <li>Conferência do incremento automático de quantidade por plano/agrupamento</li>
+                <li>Validação da vinculação correta ao ID de plano (agrupamento de OPs)</li>
+                <li>Teste da interface de seleção de agrupamento de OPs</li>
+            </ol>
+        </div>
+        
+        <div class="process-box">
+            <h3>Dobradeiras</h3>
+            <ol>
+                <li>Validação do sinal de operação (digital ou botão seletor)</li>
+                <li>Conexão do sinal ao módulo Teep</li>
+                <li>Confrontação dos tempos registrados pelo sistema com a prática real do operador</li>
+                <li>Teste do registro manual de produção</li>
+                <li>Validação do apontamento de paradas por motivo</li>
+            </ol>
+        </div>
+        
+        <div class="process-box">
+            <h3>Robôs de Solda</h3>
+            <ol>
+                <li>Teste de leitura Modbus (status, ciclo completo, contagem) quando disponível</li>
+                <li>Validação do mapa de variáveis Modbus fornecido pelo fabricante</li>
+                <li>Teste de comunicação TCP/RTU conforme especificação do robô</li>
+                <li>Validação de todas as variáveis necessárias (RUN/IDLE/FAULT, ciclo completo, contagem, alarmes)</li>
+                <li>Em alternativa (quando Modbus não disponível): validação de sinais digitais (ciclo completo e falha) nas entradas do módulo Teep</li>
+                <li>Teste da contagem automática de peças</li>
+                <li>Validação do registro de paradas por motivo</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="section page-break">
+        <h1>5. Processo Padrão TeepMES para as Máquinas</h1>
+        
+        <h2>5.1. Abertura do Processo por Tipo de Máquina</h2>
+        <p>O processo de abertura varia conforme o tipo de máquina. Abaixo estão os requisitos específicos para cada categoria:</p>
+        
+        <div class="process-box">
+            <h3>1.1. Soldagem Manual (MIG/TIG) - 41 máquinas</h3>
+            <p><strong>Informações necessárias para abertura:</strong></p>
+            <ul>
+                <li><strong>Código da Ordem de Produção (OP):</strong> Informado pelo operador ou selecionado de lista disponível no sistema</li>
+                <li><strong>Código da Máquina de Solda:</strong> Seleção obrigatória da máquina específica identificada pelo número de série cadastrado (ex.: TIG-001, MIG-015)</li>
+                <li><strong>Código do Operador:</strong> Identificação obrigatória do operador responsável pela execução da OP (código ou login)</li>
+                <li><strong>Código da Tomada:</strong> Confirmação obrigatória da tomada onde a máquina está conectada (T01, T02, T03, etc.)</li>
+            </ul>
+            <p><strong>Validação do Sistema:</strong> Antes de iniciar a produção, o sistema verifica:</p>
+            <ul>
+                <li>Disponibilidade da tomada selecionada (não pode estar em uso por outra OP)</li>
+                <li>Compatibilidade entre a máquina selecionada e a tomada (configuração de consumo elétrico)</li>
+                <li>Status operacional da máquina cadastrada</li>
+            </ul>
+        </div>
+        
+        <div class="process-box">
+            <h3>1.2. Lasers de Corte - 2 máquinas</h3>
+            <p><strong>Informações necessárias para abertura:</strong></p>
+            <ul>
+                <li><strong>Código do Agrupamento de OPs:</strong> Seleção do plano de corte/agrupamento (nesting) definido no PCP, que pode conter múltiplas OPs agrupadas</li>
+                <li><strong>Código do Operador:</strong> Identificação obrigatória do operador responsável pela execução do agrupamento</li>
+                <li><strong>Terminal:</strong> Já associado à máquina de corte; não há seleção manual de máquina</li>
+            </ul>
+            <p><strong>Características Especiais:</strong></p>
+            <ul>
+                <li>Não requer seleção de máquina individual; o terminal está vinculado fisicamente à máquina</li>
+                <li>O agrupamento de OPs permite rastreabilidade de múltiplas OPs em um único plano de corte</li>
+                <li>Sistema vincula automaticamente todas as OPs do agrupamento aos planos de corte processados</li>
+            </ul>
+        </div>
+        
+        <div class="process-box">
+            <h3>1.3. Dobradeiras - 3 máquinas</h3>
+            <p><strong>Informações necessárias para abertura:</strong></p>
+            <ul>
+                <li><strong>Código da Ordem de Produção (OP):</strong> Informado pelo operador ou selecionado de lista disponível no sistema</li>
+                <li><strong>Código do Operador:</strong> Identificação obrigatória do operador responsável pela execução da OP</li>
+                <li><strong>Terminal:</strong> Já associado à dobradeira; não há seleção manual de máquina</li>
+            </ul>
+            <p><strong>Características Especiais:</strong></p>
+            <ul>
+                <li>Não requer identificação de tomada (processo baseado em modo tempo, não em consumo elétrico)</li>
+                <li>O terminal do operador está fisicamente instalado e vinculado à máquina</li>
+            </ul>
+        </div>
+        
+        <div class="process-box">
+            <h3>1.4. Robôs de Solda - 2 células</h3>
+            <p><strong>Informações necessárias para abertura:</strong></p>
+            <ul>
+                <li><strong>Código da Ordem de Produção (OP):</strong> Informado pelo operador ou selecionado de lista disponível no sistema</li>
+                <li><strong>Código da Célula Robótica:</strong> Seleção obrigatória da célula específica (identificação por código único, ex.: ROB-01, ROB-02)</li>
+                <li><strong>Código do Operador:</strong> Identificação obrigatória do operador responsável pela execução da OP na célula</li>
+            </ul>
+            <p><strong>Características Especiais:</strong></p>
+            <ul>
+                <li>Não requer identificação de tomada (integração via Modbus ou digital direta)</li>
+                <li>Sistema identifica a célula pela integração física (Modbus ou sinais digitais)</li>
+                <li>Validação de comunicação com o robô antes de iniciar produção</li>
+            </ul>
+        </div>
+        
+        <div class="flow-step">
+            <h3>2. Monitoramento Automático</h3>
+            <p>Tempos de operação/parada capturados automaticamente por sinais digitais ou Modbus; no caso de lasers, captura adicional de fim de corte por plano.</p>
+        </div>
+        
+        <div class="flow-step">
+            <h3>3. Quantidade Produzida</h3>
+            <p>Captura automática (laser por plano; robô por ciclo completo) ou registro manual (dobradeira; soldagem manual).</p>
+        </div>
+        
+        <div class="flow-step">
+            <h3>4. Apontamento de Paradas</h3>
+            <p>Registro por motivo específico (operacional, setup, falta de material, manutenção, controle de qualidade, etc.).</p>
+        </div>
+        
+        <div class="flow-step">
+            <h3>5. Encerramento</h3>
+            <p>Fechamento de OP/agrupamento com consolidação automática de tempos e produção no TeepMES.</p>
+        </div>
+        
+        <div class="flow-step">
+            <h3>6. Relatórios e Painéis</h3>
+            <p>Geração de relatórios de produtividade por máquina/operador, cálculo de OEE (quando aplicável), histórico de paradas e rastreabilidade completa.</p>
+        </div>
+        
+        <h2>5.2. Processo Detalhado para Soldagem Manual (MIG/TIG)</h2>
+        
+        <h3>Abertura do Processo - Informações Necessárias:</h3>
+        <ul>
+            <li><strong>Código da Ordem de Produção (OP):</strong> Informado pelo operador ou selecionado de lista</li>
+            <li><strong>Código da Máquina de Solda:</strong> Seleção da máquina específica pelo número de série cadastrado</li>
+            <li><strong>Código do Operador:</strong> Identificação do operador no sistema</li>
+            <li><strong>Código da Tomada:</strong> Confirmação da tomada onde a máquina está conectada (T01, T02, etc.)</li>
+        </ul>
+        
+        <h3>Monitoramento Automático:</h3>
+        <ul>
+            <li><strong>Detecção de Operação:</strong> O TC 200/5A + RMCS-TC detecta automaticamente quando a corrente ultrapassa o setpoint configurado</li>
+            <li><strong>Status do Sistema:</strong> "Soldando" (corrente alta) / "Parado" (corrente baixa)</li>
+            <li><strong>Registro:</strong> Data/hora de início e fim de cada ciclo de soldagem registrados automaticamente</li>
+            <li><strong>Tempos:</strong> Cálculo automático de tempo total de operação e tempo de parada</li>
+        </ul>
+        
+        <h3>Quantidade Produzida:</h3>
+        <ul>
+            <li><strong>Método:</strong> Manual - Operador informa quantidade ao final da OP ou durante o processo</li>
+            <li><strong>Interface:</strong> Campo numérico na tela do terminal para entrada da quantidade</li>
+        </ul>
+        
+        <h3>Apontamento de Paradas:</h3>
+        <ul>
+            <li><strong>Motivos Padrão:</strong> Operacional, Setup/Ajuste, Falta de Material, Manutenção, Controle de Qualidade, Outros</li>
+            <li><strong>Interface:</strong> Seleção de motivo em lista padronizada configurável</li>
+            <li><strong>Registro:</strong> Data/hora de início e fim de cada parada com motivo associado</li>
+        </ul>
+        
+        <h3>Encerramento da OP:</h3>
+        <ul>
+            <li><strong>Consolidação Automática:</strong> Cálculo automático de tempos de operação/parada</li>
+            <li><strong>Produção:</strong> Quantidade informada pelo operador</li>
+            <li><strong>Eficiência:</strong> Cálculo automático de OEE (Overall Equipment Effectiveness) por máquina/operador</li>
+            <li><strong>Rastreabilidade:</strong> Histórico completo da OP com todos os dados coletados</li>
+        </ul>
+        
+        <h2>5.3. Processo para Outras Máquinas (Lasers, Dobradeiras, Robôs)</h2>
+        
+        <h3>Lasers de Corte:</h3>
+        <ul>
+            <li>Abertura: Seleção de Agrupamento de OPs (plano de corte)</li>
+            <li>Monitoramento: Captura automática de fim de corte via sinal digital</li>
+            <li>Quantidade: Automática por plano (incremento a cada fim de corte)</li>
+            <li>Paradas: Apontamento manual por motivo</li>
+            <li>Encerramento: Fechamento de agrupamento com consolidação</li>
+        </ul>
+        
+        <h3>Dobradeiras:</h3>
+        <ul>
+            <li>Abertura: Seleção de OP e máquina</li>
+            <li>Monitoramento: Sinal digital de operação ou botão seletor</li>
+            <li>Quantidade: Manual (operador informa ao final do lote/ciclo)</li>
+            <li>Paradas: Apontamento manual por motivo</li>
+            <li>Encerramento: Fechamento de OP com consolidação</li>
+        </ul>
+        
+        <h3>Robôs de Solda:</h3>
+        <ul>
+            <li>Abertura: Seleção de OP e célula robótica</li>
+            <li>Monitoramento: Modbus (preferencial) ou sinais digitais alternativos</li>
+            <li>Quantidade: Automática por ciclo completo detectado</li>
+            <li>Paradas: Automática quando detectado estado FAULT, ou manual por motivo específico</li>
+            <li>Encerramento: Fechamento de OP com consolidação</li>
+        </ul>
+    </div>
+
+    <div class="section page-break">
+        <h1>10. Anexos – Especificações Recomendadas</h1>
+        
+        <h2>10.1. Relé de Corrente</h2>
+        <ul>
+            <li><strong>Modelo:</strong> RMCS-TC 220 V com entrada TC 5 A</li>
+            <li><strong>Contato:</strong> SPDT (Single Pole Double Throw)</li>
+            <li><strong>Setpoint:</strong> Ajustável</li>
+            <li><strong>Delays:</strong> ON e OFF configuráveis</li>
+            <li><strong>Referência:</strong> <a href="https://www.primtec.com.br/rele-monitor-e-controle-de-corrente-220v-com-entrada-para-tc-x-5a-ajustavel-rmcs" target="_blank" class="reference-link">Primtec - RMCS-TC</a></li>
+        </ul>
+        
+        <h2>10.2. Transformador de Corrente</h2>
+        <ul>
+            <li><strong>Modelo:</strong> TC 200/5 A</li>
+            <li><strong>Classe:</strong> 1.0</li>
+            <li><strong>Montagem:</strong> DIN Rail</li>
+            <li><strong>Relação:</strong> 200A primário / 5A secundário</li>
+            <li><strong>Exemplo:</strong> Schneider METSECT5CC020 ou similar</li>
+            <li><strong>Referência:</strong> <a href="https://www.dimensional.com.br/transformador-corrente-janela-200-5-ref-mes62-30-200-5-5tca12005-altronic/p?idsku=1290787" target="_blank" class="reference-link">Dimensional - TC 200/5A</a></li>
+        </ul>
+        
+        <h2>10.3. Módulos Teep</h2>
+        <ul>
+            <li><strong>Função Principal:</strong> Entradas digitais 24 V isoladas</li>
+            <li><strong>Isolamento:</strong> Galvânico completo do 220/380 V</li>
+            <li><strong>Comunicação:</strong> Ethernet industrial</li>
+            <li><strong>Opção Adicional:</strong> Driver/cliente Modbus TCP/RTU para integração com robôs</li>
+        </ul>
+        
+        <h2>10.4. Fontes de Alimentação</h2>
+        <ul>
+            <li><strong>Tipo:</strong> 24 VDC DIN Rail</li>
+            <li><strong>Capacidade:</strong> 2–5 A por quadro</li>
+            <li><strong>Proteção:</strong> Disjuntor ou fusível individual por circuito</li>
+        </ul>
+    </div>
+
+    
+
+    <!-- Seção de Aprovação -->
+    <div class="approval-section">
+        <div class="logo-container">
+            <div>
+                <img src="https://teep.com.br/wp-content/uploads/2023/11/cropped-cropped-teep-logo-menor-300x87.png" alt="Teep Logo">
+            </div>
+            <div>
+                <img src="https://www.caldlaser.com.br/imagens/logo-quality.png" alt="Caldlaser Logo">
+            </div>
+        </div>
+
+        <h1 class="approval-title">11. Aprovação do Documento</h1>
+        
+        <div class="approval-form">
+            <form id="approval-form" onsubmit="validateApproval(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="empresa-nome">Nome da Empresa:</label>
+                        <input type="text" id="empresa-nome" name="empresa-nome" required placeholder="Ex: Caldlaser">
+                    </div>
+                    <div class="form-group">
+                        <label for="aprovador-nome">Nome do Aprovador:</label>
+                        <input type="text" id="aprovador-nome" name="aprovador-nome" required placeholder="Ex: João Silva">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="aprovador-cpf">CPF do Aprovador:</label>
+                    <input type="text" id="aprovador-cpf" name="aprovador-cpf" required placeholder="Ex: 000.000.000-00" maxlength="14" oninput="formatCPF(this)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="aprovador-cargo">Cargo/Função:</label>
+                    <input type="text" id="aprovador-cargo" name="aprovador-cargo" placeholder="Ex: Gerente de Produção, Diretor Industrial">
+                </div>
+                
+                <div class="form-group">
+                    <label for="aprovador-email">Email para Confirmação:</label>
+                    <input type="email" id="aprovador-email" name="aprovador-email" required placeholder="Ex: joao.silva@caldlaser.com.br">
+                </div>
+                
+                <div class="form-group">
+                    <label for="observacoes-aprovacao">Observações (opcional):</label>
+                    <textarea id="observacoes-aprovacao" name="observacoes-aprovacao" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 11pt; font-family: 'Calibri', 'Arial', sans-serif; box-sizing: border-box;" placeholder="Comentários ou observações sobre a aprovação"></textarea>
+                </div>
+                
+                <div style="display:flex; justify-content:flex-end; gap:10px;">
+                    <button type="submit" class="approval-button" id="validate-button">
+                        Validar e Enviar Aprovação
+                    </button>
+                </div>
+            </form>
+            
+            <div id="success-message" class="success-message">
+                <strong>✓ Aprovação enviada com sucesso!</strong><br>
+                O documento foi validado e a aprovação foi enviada por email. Você receberá uma cópia em breve.
+            </div>
+            
+            <div id="error-message" class="error-message">
+                <strong>✗ Erro ao enviar aprovação</strong><br>
+                Por favor, verifique os dados e tente novamente. Se o problema persistir, entre em contato com a equipe Teep.
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background-color: #fff; border-radius: 5px; border: 1px solid #ddd;">
+            <p style="text-align: center; color: #666; font-size: 10pt; margin: 0;">
+                <strong>Documento Técnico - DDP Caldlaser</strong><br>
+                Versão 1.1 | TeepMES<br>
+                <span id="approval-date" style="margin-top: 10px; display: block;"></span>
+            </p>
+        </div>
+    </div>
+
+    <div style="page-break-before: always; margin-top: 50px; text-align: center; color: #666; font-size: 10pt; border-top: 1px solid #ddd; padding-top: 20px;">
+        <p><strong>Documento Técnico - DDP Caldlaser</strong></p>
+        <p>Versão 1.1 | TeepMES</p>
+        <p>Este documento descreve o processo técnico e o escopo de desenvolvimento do projeto de monitoramento e gestão de produção.</p>
+    </div>
+
+    <script>
+        // Inserir data atual no cabeçalho
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('pt-BR');
+        
+        // Inserir data atual na seção de aprovação
+        document.getElementById('approval-date').textContent = 'Data: ' + new Date().toLocaleDateString('pt-BR', { 
+            day: '2-digit', 
+            month: '2-digit', 
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        // Função para formatar CPF
+        function formatCPF(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            }
+            input.value = value;
+        }
+        
+        // Função para validar e enviar aprovação
+        function validateApproval(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('approval-form');
+            const formData = new FormData(form);
+            
+            const empresaNome = formData.get('empresa-nome');
+            const aprovadorNome = formData.get('aprovador-nome');
+            const aprovadorCPF = formData.get('aprovador-cpf');
+            const aprovadorCargo = formData.get('aprovador-cargo');
+            const aprovadorEmail = formData.get('aprovador-email');
+            const observacoes = formData.get('observacoes-aprovacao');
+            
+            // Validação básica
+            if (!empresaNome || !aprovadorNome || !aprovadorCPF || !aprovadorEmail) {
+                showMessage('error', 'Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+            
+            // Validação de CPF básica (deve ter 11 dígitos)
+            const cpfNumbers = aprovadorCPF.replace(/\D/g, '');
+            if (cpfNumbers.length !== 11) {
+                showMessage('error', 'CPF deve conter 11 dígitos.');
+                return;
+            }
+            
+            // Desabilitar botão durante envio
+            const button = document.getElementById('validate-button');
+            button.disabled = true;
+            button.textContent = 'Enviando...';
+            
+            // Preparar dados para Formspree (formato JSON)
+            const emailData = {
+                _subject: 'Aprovação DDP Caldlaser - ' + empresaNome,
+                Tipo: 'Aprovação DDP Caldlaser',
+                Empresa: empresaNome,
+                Aprovador: aprovadorNome,
+                CPF: aprovadorCPF,
+                Cargo: aprovadorCargo || 'Não informado',
+                Email: aprovadorEmail,
+                Observações: observacoes || 'Nenhuma observação',
+                Data: new Date().toLocaleString('pt-BR'),
+                'Versão Documento': '1.1',
+                Status: 'Aprovado'
+            };
+            
+            // Preparar FormData para envio
+            const formDataToSend = new FormData();
+            Object.keys(emailData).forEach(key => {
+                formDataToSend.append(key, emailData[key]);
+            });
+            
+            // Enviar via Formspree usando endpoint JSON (sem redirecionamento)
+            fetch('https://formspree.io/f/mblybqqb', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: formDataToSend,
+                mode: 'cors'
+            })
+            .then(async response => {
+                // Verificar se a resposta é OK ou se é um redirecionamento (302)
+                if (response.ok) {
+                    try {
+                        const data = await response.json();
+                        showMessage('success', '');
+                        
+                        // Limpar formulário após sucesso
+                        setTimeout(() => {
+                            form.reset();
+                        }, 3000);
+                        
+                        // Log de confirmação
+                        console.log('Aprovação enviada com sucesso para:', aprovadorEmail);
+                    } catch (e) {
+                        // Se não conseguir ler JSON, pode ser redirecionamento
+                        // Usar método alternativo
+                        sendViaHiddenForm(emailData);
+                    }
+                } else if (response.status === 302 || response.status === 0) {
+                    // Redirecionamento ou erro de CORS - usar método alternativo
+                    sendViaHiddenForm(emailData);
+                } else {
+                    throw new Error('Erro no servidor: ' + response.status);
+                }
+            })
+            .catch(error => {
+                console.error('Erro no fetch:', error);
+                // Sempre tentar método alternativo quando fetch falhar
+                // Isso cobre casos de CORS, arquivo local, etc.
+                sendViaHiddenForm(emailData);
+            })
+            .finally(() => {
+                button.disabled = false;
+                button.textContent = 'Validar e Enviar Aprovação';
+            });
+        }
+        
+        // Função alternativa para enviar via formulário oculto (quando há erro de CORS)
+        function sendViaHiddenForm(emailData) {
+            // Criar iframe oculto para receber a resposta do Formspree
+            let iframe = document.getElementById('hidden-submit-iframe');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.id = 'hidden-submit-iframe';
+                iframe.name = 'hidden-submit-iframe';
+                iframe.style.display = 'none';
+                iframe.style.width = '0';
+                iframe.style.height = '0';
+                document.body.appendChild(iframe);
+            }
+            
+            // Criar formulário oculto
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'https://formspree.io/f/mblybqqb';
+            form.target = 'hidden-submit-iframe';
+            form.style.display = 'none';
+            
+            // Adicionar campos ao formulário
+            Object.keys(emailData).forEach(key => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = emailData[key];
+                form.appendChild(input);
+            });
+            
+            // Adicionar ao body e submeter
+            document.body.appendChild(form);
+            form.submit();
+            
+            // Remover formulário após envio
+            setTimeout(() => {
+                if (form.parentNode) {
+                    document.body.removeChild(form);
+                }
+            }, 2000);
+            
+            // Mostrar mensagem de sucesso após um pequeno delay
+            setTimeout(() => {
+                showMessage('success', '');
+                
+                // Limpar formulário principal
+                setTimeout(() => {
+                    document.getElementById('approval-form').reset();
+                }, 1000);
+            }, 500);
+        }
+        
+        // Função para mostrar mensagens
+        function showMessage(type, customMessage) {
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+            
+            if (type === 'success') {
+                successMsg.style.display = 'block';
+                errorMsg.style.display = 'none';
+            } else {
+                errorMsg.style.display = 'block';
+                successMsg.style.display = 'none';
+                if (customMessage) {
+                    errorMsg.innerHTML = '<strong>✗ Erro</strong><br>' + customMessage;
+                }
+            }
+            
+            // Scroll para mensagem
+            if (type === 'success') {
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+    </script>
+</body>
+</html>
