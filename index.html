@@ -387,7 +387,7 @@
         <p>Monitoramento em modo tempo (tempos de operação) com produção informada manualmente pelo operador.</p>
         
         <h2>2.4. Robôs de Solda - 2 células</h2>
-        <p>Conexão via protocolo Modbus (preferencial) com variáveis de status/ciclo, ou alternativa por entradas digitais quando Modbus não disponível.</p>
+        <p>Conexão obrigatória via <strong>Modbus TCP (TCP/IP)</strong>, com leitura direta de variáveis de status/ciclo. O <strong>Teep</strong> conecta-se diretamente ao robô/PLC pela rede Ethernet.</p>
     </div>
 
     <div class="section page-break">
@@ -462,8 +462,8 @@
                 </tr>
                 <tr>
                     <td><strong>Robô de Solda</strong></td>
-                    <td>Modbus (preferencial) / digitais alternativas</td>
-                    <td>Módulo/driver Modbus + digitais</td>
+                    <td><strong>Modbus TCP (TCP/IP)</strong> direto com robô/PLC</td>
+                    <td>Cliente Modbus TCP no Teep (Ethernet)</td>
                     <td>Necessário mapa de variáveis do fabricante do robô</td>
                 </tr>
             </tbody>
@@ -503,13 +503,10 @@
         <div class="process-box">
             <h3>Módulos IoT Teep</h3>
             <ul>
-                <li><strong>Função:</strong> Entradas digitais 24V isoladas</li>
+                <li><strong>Função:</strong> Entradas digitais 24V <strong>fotoisoladas</strong></li>
                 <li><strong>Alimentação:</strong> 24VDC (fonte fornecida e instalada pelo cliente)</li>
-                <li><strong>Entradas:</strong> Digitais 24V com isolamento galvânico completo do 220/380V</li>
+                <li><strong>Entradas:</strong> Digitais 24V fotoisoladas; isolamento do 220/380V garantido no módulo</li>
                 <li><strong>Comunicação:</strong> Ethernet industrial (IP fixo)</li>
-                <li><strong>Proteção:</strong> Isolamento galvânico completo</li>
-                <li><strong>Quantidade:</strong> Conforme número de pontos de monitoramento</li>
-                <li><strong>Responsabilidade de Fornecimento e Instalação:</strong> Teep</li>
             </ul>
         </div>
         
@@ -726,11 +723,10 @@ Máquina de Solda (MIG/TIG) ◄───────────┘             
         <div class="process-box">
             <h3>Robôs de Solda</h3>
             <ol>
-                <li>Teste de leitura Modbus (status, ciclo completo, contagem) quando disponível</li>
+                <li>Teste de leitura <strong>Modbus TCP</strong> (status, ciclo completo, contagem)</li>
                 <li>Validação do mapa de variáveis Modbus fornecido pelo fabricante</li>
-                <li>Teste de comunicação TCP/RTU conforme especificação do robô</li>
+                <li>Teste de comunicação <strong>TCP (Modbus TCP)</strong> conforme especificação do robô</li>
                 <li>Validação de todas as variáveis necessárias (RUN/IDLE/FAULT, ciclo completo, contagem, alarmes)</li>
-                <li>Em alternativa (quando Modbus não disponível): validação de sinais digitais (ciclo completo e falha) nas entradas do módulo Teep</li>
                 <li>Teste da contagem automática de peças</li>
                 <li>Validação do registro de paradas por motivo</li>
             </ol>
@@ -894,7 +890,7 @@ Máquina de Solda (MIG/TIG) ◄───────────┘             
         <h3>Robôs de Solda:</h3>
         <ul>
             <li>Abertura: Seleção de OP e célula robótica</li>
-            <li>Monitoramento: Modbus (preferencial) ou sinais digitais alternativos</li>
+            <li>Monitoramento: <strong>Modbus TCP (TCP/IP)</strong> direto com o robô/PLC</li>
             <li>Quantidade: Automática por ciclo completo detectado</li>
             <li>Paradas: Automática quando detectado estado FAULT, ou manual por motivo específico</li>
             <li>Encerramento: Fechamento de OP com consolidação</li>
