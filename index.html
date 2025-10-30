@@ -325,6 +325,37 @@
         </div>
     </div>
 
+    <div class="section">
+        <h1>Integração do ERP (KAP)</h1>
+        <p>Esta seção descreve, em nível técnico, como o TeepMES irá intercambiar dados com o ERP KAP da Caldlaser para suportar a operação diária (abertura/execução/encerramento de OPs, rastreabilidade e consolidação). A integração está prevista desde o início do projeto para simplificar cadastros e reduzir digitação; o formato e os mecanismos de troca serão definidos em conjunto sem impacto no cronograma, permitindo que a operação comece e evolua mesmo antes da integração estar ativa.</p>
+        <div class="process-box">
+            <h3>Escopo da Integração</h3>
+            <ul>
+                <li><strong>Importação (ERP → TeepMES):</strong> <u>Obrigatórios</u> para facilitar a operação: <strong>Ordens de Produção</strong>, <strong>Produtos</strong> e <strong>Operações/Roteiros</strong>. Outros itens (centros de trabalho, operadores, motivos de parada, clientes) podem ser integrados ou cadastrados manualmente no Teep.</li>
+                <li><strong>Exportação (TeepMES → ERP):</strong> dados de <strong>produção</strong>, <strong>paradas</strong>, <strong>tempos</strong> e <strong>status</strong>; opcionalmente <strong>movimentação/consumo de matérias‑primas em operação</strong>.</li>
+            </ul>
+        </div>
+        <div class="process-box">
+            <h3>Formato e Mecanismos de Troca</h3>
+            <p>O <strong>formato ainda está em definição</strong> conjuntamente com a Caldlaser. As opções viáveis incluem:</p>
+            <ul>
+                <li>Arquivos <strong>.csv</strong> (drop folder agendada)</li>
+                <li><strong>Webservice/REST</strong> (API) sobre TCP/IP</li>
+                <li><strong>View</strong> ou acesso controlado ao <strong>banco de dados</strong> (somente leitura/escrita conforme política)</li>
+                <li>Outros mecanismos equivalentes acordados entre as partes</li>
+            </ul>
+        </div>
+        <div class="process-box">
+            <h3>Responsabilidades e Premissas</h3>
+            <ul>
+                <li><strong>Caldlaser:</strong> definir o formato preferencial (campos, periodicidade, autenticação) e prover acessos/mapeamentos necessários.</li>
+                <li><strong>Teep:</strong> disponibilizar conectores e parametrizações para o formato escolhido e conduzir a homologação com a Caldlaser.</li>
+                <li><strong>Premissa:</strong> a definição do formato <u>não impacta o prazo</u> previsto; a integração é modular e pode ser ativada após o comissionamento.</li>
+                <li><strong>Operação até a integração:</strong> itens não integrados podem ser cadastrados/operados manualmente no TeepMES e migrados depois sem perda de histórico.</li>
+            </ul>
+        </div>
+    </div>
+
     <div class="section page-break">
         <h1>Resumo Executivo</h1>
         <div class="process-box">
@@ -349,7 +380,7 @@
     </div>
 
     <div class="section">
-        <h1>1. Objetivo</h1>
+        <h1>1. Objetivo de infra e aplicação no chão de Fabrica</h1>
         <p>Definir a arquitetura, responsabilidades e infraestrutura elétrica/lógica para o monitoramento e gestão de produção no <strong>TeepMES</strong>, incluindo soldagem manual (MIG/TIG), 2 lasers de corte, 3 dobradeiras e 2 robôs de solda.</p>
         <p><strong>Meta Principal:</strong> Garantir rastreabilidade completa, medição de tempos produtivos/paradas e registro de quantidades (automático ou manual conforme o processo específico de cada máquina).</p>
     </div>
