@@ -304,6 +304,28 @@
             display: none;
             border: 1px solid #f5c6cb;
         }
+        /* Export PDF button and print timestamp */
+        .export-actions { display: flex; justify-content: flex-end; margin-top: 10px; }
+        .export-btn { background: #fff; color: #507A69; border: 1px solid #507A69; padding: 8px 16px; border-radius: 6px; font-size: 11pt; font-weight: 600; cursor: pointer; }
+        .export-btn:hover { background: #f2f5f3; }
+        .print-timestamp { display: none; color: #666; font-size: 10pt; text-align: center; margin-top: 10px; }
+        @media print {
+            @page { margin: 1.4cm; }
+            body { padding: 0; max-width: 100%; }
+            .export-actions { display: none !important; }
+            .print-timestamp { display: block; position: fixed; right: 12mm; bottom: 10mm; font-size: 9pt; color: #555; }
+            .header { margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid rgba(0,0,0,0.15); }
+            .header-logos { margin-bottom: 10px; padding-bottom: 8px; }
+            h1 { margin-top: 10px; margin-bottom: 6px; padding-bottom: 4px; }
+            h2 { margin-top: 8px; margin-bottom: 6px; }
+            h3 { margin-top: 6px; margin-bottom: 4px; }
+            .section { page-break-inside: auto; margin-bottom: 10px; }
+            .page-break { page-break-before: auto !important; }
+            .process-box, .responsibility-box, .technical-spec, .flow-step { margin: 8px 0; padding: 8px; border-width: 1px; }
+            table th, table td { padding: 6px; }
+            .flow-diagram { gap: 6px; padding: 8px; }
+            .approval-section { margin-top: 12px; padding: 12px; box-shadow: none; }
+        }
     </style>
 </head>
 <body>
@@ -324,6 +346,11 @@
             <strong>Data:</strong> <span id="current-date"></span>
         </div>
     </div>
+
+    <div class="export-actions">
+        <button class="export-btn" onclick="exportToPDF()">Exportar PDF</button>
+    </div>
+    <div id="print-timestamp" class="print-timestamp"></div>
 
     <div class="section">
         <h1>Integração do ERP (KAP)</h1>
@@ -538,6 +565,25 @@
                 <li><strong>Alimentação:</strong> 24VDC (fonte fornecida e instalada pelo cliente)</li>
                 <li><strong>Entradas:</strong> Digitais 24V fotoisoladas; isolamento do 220/380V garantido no módulo</li>
                 <li><strong>Comunicação:</strong> Ethernet industrial (IP fixo)</li>
+            </ul>
+        </div>
+        
+        <div class="process-box">
+            <h3>Fonte 24V 5A – Mean Well EDR-120-24</h3>
+            <ul>
+                <li><strong>Especificações Técnicas:</strong></li>
+                <li>Modelo: <strong>EDR-120-24</strong></li>
+                <li>Potência Nominal: <strong>120W</strong></li>
+                <li>Faixa de Entrada: <strong>90-264VCA / 127-370VCC</strong></li>
+                <li>Saída: <strong>24VDC / 5A</strong></li>
+                <li>Eficiência: <strong>Até 88%</strong></li>
+                <li>Proteções Integradas: Proteção contra curto-circuito, sobrecarga, sobretensão e sobretemperatura.</li>
+                <li>Montagem: <strong>Trilho DIN</strong></li>
+                <li>Dimensões: <strong>125mm x 32mm x 102mm</strong></li>
+                <li>Peso: <strong>0.43 kg</strong></li>
+                <li>Certificações: <strong>CE, UL, RoHS</strong></li>
+                <li><strong>Responsabilidade de Aquisição:</strong> Caldlaser</li>
+                <li><strong>Referência/Compra:</strong> <a href="https://www.fontesmeanwell.com.br/fonte-chaveada-din-120w-90-264vca-127-370vcc-saida-24vcc-5a-edr-120-24-mean-well?parceiro=1&gad_source=1&gad_campaignid=21689267504&gbraid=0AAAAA-H4nRG7NHZmHep3zXZ3lEQBcDM8Y&gclid=Cj0KCQjwvJHIBhCgARIsAEQnWlCyyzTCLt689x7occKUGdg0xQqJZMLLR2MRfQ8HYhJ9nb78uVk3NFcaAiW8EALw_wcB" target="_blank" class="reference-link">Mean Well EDR-120-24 (24V / 5A)</a></li>
             </ul>
         </div>
         
@@ -964,6 +1010,20 @@ Máquina de Solda (MIG/TIG) ◄───────────┘             
             <li><strong>Capacidade:</strong> 2–5 A por quadro</li>
             <li><strong>Proteção:</strong> Disjuntor ou fusível individual por circuito</li>
         </ul>
+        
+        <h2>10.5. Fonte 24 V Industrial (5 A) – Mean Well EDR-120-24</h2>
+        <ul>
+            <li><strong>Modelo:</strong> Mean Well <strong>EDR-120-24</strong></li>
+            <li><strong>Tipo:</strong> Fonte chaveada industrial para trilho DIN</li>
+            <li><strong>Entrada:</strong> 90–264 VAC / 127–370 VDC</li>
+            <li><strong>Saída:</strong> 24 VDC / <strong>5 A</strong> (120 W)</li>
+            <li><strong>Eficiência:</strong> até 88%</li>
+            <li><strong>Proteções:</strong> curto-circuito, sobrecarga, sobretensão e sobretemperatura</li>
+            <li><strong>Refrigeração:</strong> convecção natural</li>
+            <li><strong>Montagem:</strong> Trilho DIN</li>
+            <li><strong>Dimensões:</strong> 125 × 32 × 102 mm (aprox.)</li>
+            <li><strong>Referência/Compra:</strong> <a href="https://www.fontesmeanwell.com.br/fonte-chaveada-din-120w-90-264vca-127-370vcc-saida-24vcc-5a-edr-120-24-mean-well?parceiro=1&gad_source=1&gad_campaignid=21689267504&gbraid=0AAAAA-H4nRG7NHZmHep3zXZ3lEQBcDM8Y&gclid=Cj0KCQjwvJHIBhCgARIsAEQnWlCyyzTCLt689x7occKUGdg0xQqJZMLLR2MRfQ8HYhJ9nb78uVk3NFcaAiW8EALw_wcB" target="_blank" class="reference-link">Mean Well EDR-120-24 (24V / 5A)</a></li>
+        </ul>
     </div>
 
     
@@ -1048,8 +1108,8 @@ Máquina de Solda (MIG/TIG) ◄───────────┘             
     </div>
 
     <script>
-        // Inserir data atual no cabeçalho
-        document.getElementById('current-date').textContent = new Date().toLocaleDateString('pt-BR');
+        // Inserir data e hora atual no cabeçalho
+        document.getElementById('current-date').textContent = new Date().toLocaleString('pt-BR');
         
         // Inserir data atual na seção de aprovação
         document.getElementById('approval-date').textContent = 'Data: ' + new Date().toLocaleDateString('pt-BR', { 
@@ -1247,6 +1307,15 @@ Máquina de Solda (MIG/TIG) ◄───────────┘             
             } else {
                 errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
+        }
+
+        // Exportar página inteira para PDF (via print → Salvar como PDF)
+        function exportToPDF() {
+            const stamp = document.getElementById('print-timestamp');
+            if (stamp) {
+                stamp.textContent = 'Gerado em: ' + new Date().toLocaleString('pt-BR');
+            }
+            window.print();
         }
     </script>
 </body>
